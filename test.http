@@ -1,0 +1,5 @@
+GET http://localhost:3000/map?region=fontaine&type=chest
+
+GET http://localhost:3000/regions
+
+GET http://localhost:3000/types?region=fontaine
