@@ -1,68 +1,178 @@
-body{
-    background-image:url(./images/background.jpg)
+/* ===== RESET & BASE ===== */
+* {
+    box-sizing: border-box;
 }
 
-nav p{
-    background-color: white;
+body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background-image: url(./images/background.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+/* ===== PLATFORM COLORS (variabili, più facili da mantenere) ===== */
+:root {
+    --pc-color: #f4d600;
+    --ps5-color: #0047ab;
+    --switch-color: #e60012;
+    --xbox-color: #107c10;
+}
+
+.pc {
+    background-color: var(--pc-color);
     color: black;
 }
 
-.pc{
-    background-color: yellow;
-    color: black;
-}
-
-
-.ps5{
-    background-color: blue;
+.ps5 {
+    background-color: var(--ps5-color);
     color: white;
 }
 
-.switch{
-    background-color: red;
-    color: black;
+.switch {
+    background-color: var(--switch-color);
+    color: white;
 }
 
-.xbox{
-    background-color: green;
-    color: black;
+.xbox {
+    background-color: var(--xbox-color);
+    color: white;
 }
 
-header{
+/* ===== HEADER ===== */
+header {
     text-align: center;
     color: white;
-    border: 1px solid black;
-    background-color: black;
-    opacity: 70%;
-    margin: auto;
+    border-bottom: 2px solid #000;
+    /* invece di opacity sull'header (che sbiadisce anche il testo),
+       usiamo un colore di sfondo semi-trasparente: il testo resta nitido */
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px 0;
 }
 
-main{
-    border: 1px solid black;
-    background-color: lightgrey;
-    
+header h1 {
+    margin: 0;
+    letter-spacing: 1px;
 }
 
-section{
+/* ===== BARRA DI RICERCA ===== */
+nav {
+    background-color: #c9c9c9;
+    padding: 10px;
+    text-align: center;
+}
+
+nav input[type="search"] {
+    width: min(400px, 90%);
+    padding: 8px 14px;
+    border: 1px solid #888;
+    border-radius: 20px;
+    font-size: 1rem;
+    outline: none;
+    transition: box-shadow 0.2s ease;
+}
+
+nav input[type="search"]:focus {
+    box-shadow: 0 0 0 3px rgba(0, 71, 171, 0.3);
+    border-color: var(--ps5-color);
+}
+
+/* ===== MAIN / GRID ===== */
+main {
+    border: 1px solid black;
+    background-color: rgba(211, 211, 211, 0.9);
+    padding: 20px;
+    min-height: 60vh;
+}
+
+section {
     display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 260px));
     justify-content: center;
-    grid-template-columns: 20% 20% 20%;
+    gap: 20px;
 }
 
-footer{
-    border: 1px solid black;
-}
-
-div{
-    margin: auto;
-    border: 1px solid black;
-    padding: 5px;
+/* ===== CARD (achievement) ===== */
+div {
+    margin: 0;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
     background-color: lightcyan;
-    width: 200px;
-    height: 150px;
+    width: 100%;
+    min-height: 150px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* i figli non si stirano più: larghi solo quanto il contenuto */
+    gap: 6px;
 }
 
-div p:first-child{
+div:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35);
+}
+
+div p {
+    margin: 0;
+    padding: 6px 8px;
+    border-radius: 4px;
+}
+
+/* titolo del gioco (primo <p> dentro la card): questo SÌ vogliamo a piena larghezza */
+div p:first-child {
+    width: 100%;
     border: 1px solid black;
     background-color: crimson;
+    color: white;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* barra di progresso con <meter> */
+meter {
+    width: 100%;
+    height: 12px;
+    margin-top: auto;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+/* Chrome / Edge / Safari (WebKit) */
+meter::-webkit-meter-bar {
+    background: #e0e0e0;
+    border: none;
+    border-radius: 6px;
+}
+
+meter::-webkit-meter-optimum-value {
+    background: #2e7d32;
+    border-radius: 6px 0 0 6px;
+}
+
+/* Firefox */
+meter::-moz-meter-bar {
+    background: #2e7d32;
+    border-radius: 6px;
+}
+
+/* ===== FOOTER ===== */
+footer {
+    border-top: 1px solid black;
+    background-color: rgba(0, 0, 0, 0.85);
+    color: white;
+    text-align: center;
+    padding: 12px 0;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+    section {
+        grid-template-columns: 1fr;
+    }
 }
